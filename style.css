@@ -1,0 +1,514 @@
+/* ==========================================================================
+   Investimento Culturale - Foglio di stile
+   Prof. Gabriele Di Lorenzo
+   ========================================================================== */
+
+/* ==========================================================================
+   1. VARIABILI E DESIGN TOKEN
+   ========================================================================== */
+
+:root {
+    /* Palette cromatica */
+    --colore-avorio:           #f7f2e7;
+    --colore-avorio-scuro:     #ede5d2;
+    --colore-carta:            #fbf8f1;
+    --colore-antracite:        #1f1f1f;
+    --colore-antracite-medio:  #3a3a3a;
+    --colore-antracite-soft:   #5a5a5a;
+    --colore-bordeaux:         #7a1f2b;
+    --colore-bordeaux-scuro:   #5d171f;
+    --colore-bordeaux-chiaro:  #a85362;
+    --colore-bordo:            #d9cfb8;
+    --colore-bordo-soft:       #e9e0c9;
+    --colore-verde-pubblicato: #4a6b3a;
+    --colore-ocra-in-stampa:   #8a6510;
+
+    /* Tipografia */
+    --font-titoli:    'Lora', Georgia, 'Times New Roman', serif;
+    --font-corpo:     'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    /* Spaziature */
+    --spazio-xs:  0.4rem;
+    --spazio-sm:  0.75rem;
+    --spazio-md:  1.25rem;
+    --spazio-lg:  2rem;
+    --spazio-xl:  3rem;
+    --spazio-xxl: 4.5rem;
+
+    /* Raggi e ombre */
+    --raggio-card:    4px;
+    --raggio-piccolo: 2px;
+    --raggio-pulsante: 3px;
+    --ombra-card:        0 1px 2px rgba(31, 31, 31, 0.04), 0 2px 8px rgba(31, 31, 31, 0.04);
+    --ombra-card-hover:  0 4px 8px rgba(31, 31, 31, 0.06), 0 8px 24px rgba(31, 31, 31, 0.08);
+
+    /* Larghezze */
+    --larghezza-container: 1240px;
+    --larghezza-lede:      720px;
+}
+
+/* ==========================================================================
+   2. RESET DI BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-corpo);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--colore-antracite);
+    background-color: var(--colore-avorio);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+img,
+picture,
+svg {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: var(--colore-bordeaux);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.18s ease;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--colore-bordeaux-scuro);
+}
+
+ul {
+    list-style: none;
+}
+
+/* ==========================================================================
+   3. STRUTTURA: CONTAINER
+   ========================================================================== */
+
+.container {
+    width: 100%;
+    max-width: var(--larghezza-container);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+main.container {
+    flex: 1;
+    padding-block: var(--spazio-xxl);
+}
+
+/* ==========================================================================
+   4. INTESTAZIONE DELLA PAGINA
+   ========================================================================== */
+
+.page-header {
+    background-color: var(--colore-avorio-scuro);
+    border-bottom: 1px solid var(--colore-bordo);
+    padding-block: clamp(3rem, 8vw, 5.5rem);
+    position: relative;
+}
+
+/* Filo bordeaux orizzontale sotto l'intestazione */
+.page-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--colore-bordeaux) 20%,
+        var(--colore-bordeaux) 80%,
+        transparent 100%
+    );
+    opacity: 0.5;
+}
+
+.eyebrow {
+    font-family: var(--font-corpo);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--colore-bordeaux);
+    margin-bottom: var(--spazio-md);
+}
+
+.page-title {
+    font-family: var(--font-titoli);
+    font-weight: 600;
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    line-height: 1.1;
+    color: var(--colore-antracite);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--spazio-md);
+}
+
+.page-lede {
+    font-family: var(--font-corpo);
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--colore-antracite-medio);
+    max-width: var(--larghezza-lede);
+}
+
+/* ==========================================================================
+   5. GRIGLIA DEI LIBRI
+   ========================================================================== */
+
+.grid-libri {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* Tablet: 2 colonne a partire da 720px */
+@media (min-width: 720px) {
+    .grid-libri {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop: 3 colonne a partire da 1100px */
+@media (min-width: 1100px) {
+    .grid-libri {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ==========================================================================
+   6. SCHEDA DEL SINGOLO LIBRO
+   ========================================================================== */
+
+.libro {
+    background-color: var(--colore-carta);
+    border: 1px solid var(--colore-bordo);
+    border-radius: var(--raggio-card);
+    padding: clamp(1.5rem, 2.5vw, 2.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spazio-md);
+    box-shadow: var(--ombra-card);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    position: relative;
+}
+
+.libro:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--ombra-card-hover);
+    border-color: var(--colore-bordeaux-chiaro);
+}
+
+/* Filo bordeaux sul margine superiore della scheda */
+.libro::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    height: 3px;
+    background-color: var(--colore-bordeaux);
+    border-top-left-radius: var(--raggio-card);
+    border-top-right-radius: var(--raggio-card);
+    opacity: 0.85;
+}
+
+/* Intestazione della scheda */
+.libro__intestazione {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spazio-xs);
+    padding-top: var(--spazio-xs);
+}
+
+.libro__status {
+    display: inline-block;
+    align-self: flex-start;
+    font-family: var(--font-corpo);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3em 0.7em;
+    border-radius: var(--raggio-piccolo);
+    margin-bottom: var(--spazio-sm);
+}
+
+.libro__status--pubblicato {
+    background-color: rgba(74, 107, 58, 0.1);
+    color: var(--colore-verde-pubblicato);
+    border: 1px solid rgba(74, 107, 58, 0.25);
+}
+
+.libro__status--in-stampa {
+    background-color: rgba(138, 101, 16, 0.1);
+    color: var(--colore-ocra-in-stampa);
+    border: 1px solid rgba(138, 101, 16, 0.3);
+}
+
+.libro__titolo {
+    font-family: var(--font-titoli);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    color: var(--colore-antracite);
+    letter-spacing: -0.005em;
+}
+
+.libro__sottotitolo {
+    font-family: var(--font-titoli);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--colore-antracite-medio);
+    margin-top: var(--spazio-xs);
+}
+
+.libro__autori {
+    font-family: var(--font-corpo);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--colore-antracite-soft);
+    margin-top: var(--spazio-sm);
+    letter-spacing: 0.01em;
+}
+
+/* Etichette tematiche */
+.libro__etichette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding-top: var(--spazio-xs);
+    padding-bottom: var(--spazio-xs);
+    border-top: 1px solid var(--colore-bordo-soft);
+    padding-top: var(--spazio-md);
+}
+
+.libro__etichette li {
+    font-family: var(--font-corpo);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--colore-bordeaux);
+    background-color: rgba(122, 31, 43, 0.05);
+    border: 1px solid rgba(122, 31, 43, 0.15);
+    padding: 0.32em 0.7em;
+    border-radius: var(--raggio-piccolo);
+    letter-spacing: 0.01em;
+}
+
+/* Corpo del testo */
+.libro__testo {
+    flex: 1;
+}
+
+.libro__testo p {
+    font-family: var(--font-corpo);
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--colore-antracite-medio);
+    text-align: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+/* Pulsanti di azione */
+.libro__azioni {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spazio-sm);
+    margin-top: var(--spazio-sm);
+    padding-top: var(--spazio-md);
+    border-top: 1px solid var(--colore-bordo-soft);
+}
+
+/* ==========================================================================
+   7. PULSANTI
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-corpo);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.75em 1.25em;
+    border-radius: var(--raggio-pulsante);
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.1s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    line-height: 1.2;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn--primario {
+    background-color: var(--colore-bordeaux);
+    color: var(--colore-carta);
+    border-color: var(--colore-bordeaux);
+}
+
+.btn--primario:hover,
+.btn--primario:focus-visible {
+    background-color: var(--colore-bordeaux-scuro);
+    border-color: var(--colore-bordeaux-scuro);
+    color: var(--colore-carta);
+}
+
+.btn--secondario {
+    background-color: transparent;
+    color: var(--colore-bordeaux);
+    border-color: var(--colore-bordeaux);
+}
+
+.btn--secondario:hover,
+.btn--secondario:focus-visible {
+    background-color: var(--colore-bordeaux);
+    color: var(--colore-carta);
+}
+
+/* ==========================================================================
+   8. FOCUS VISIBILE (accessibilità)
+   ========================================================================== */
+
+:focus-visible {
+    outline: 2px solid var(--colore-bordeaux);
+    outline-offset: 3px;
+    border-radius: var(--raggio-piccolo);
+}
+
+.btn:focus-visible {
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   9. PIÈ DI PAGINA
+   ========================================================================== */
+
+.page-footer {
+    background-color: var(--colore-antracite);
+    color: var(--colore-avorio);
+    padding-block: var(--spazio-xl);
+    margin-top: var(--spazio-xxl);
+    text-align: center;
+}
+
+.page-footer__nome {
+    font-family: var(--font-titoli);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--colore-avorio);
+    margin-bottom: var(--spazio-xs);
+}
+
+.page-footer__qualifica {
+    font-family: var(--font-corpo);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--colore-bordo);
+    margin-bottom: var(--spazio-md);
+    max-width: var(--larghezza-lede);
+    margin-inline: auto;
+    line-height: 1.5;
+}
+
+.page-footer__contatti {
+    font-family: var(--font-corpo);
+    font-size: 0.92rem;
+    color: var(--colore-bordo);
+}
+
+.page-footer__contatti a {
+    color: var(--colore-avorio);
+    text-decoration: underline;
+    text-decoration-color: rgba(247, 242, 231, 0.4);
+}
+
+.page-footer__contatti a:hover,
+.page-footer__contatti a:focus-visible {
+    color: var(--colore-carta);
+    text-decoration-color: var(--colore-avorio);
+}
+
+.page-footer__sep {
+    margin-inline: 0.6em;
+    color: var(--colore-bordeaux-chiaro);
+}
+
+/* ==========================================================================
+   10. STAMPA
+   ========================================================================== */
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .libro {
+        page-break-inside: avoid;
+        border: 1px solid #999;
+        box-shadow: none;
+    }
+
+    .libro__azioni,
+    .page-footer {
+        display: none;
+    }
+
+    .libro::before {
+        background-color: #333;
+    }
+}
+
+/* ==========================================================================
+   11. PREFERENZE DI MOVIMENTO RIDOTTO
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .libro:hover {
+        transform: none;
+    }
+}
