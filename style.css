@@ -348,6 +348,105 @@ main.container {
 }
 
 /* ==========================================================================
+   6.bis. MEDIA DELLA SCHEDA (mockup, schema, video)
+   ========================================================================== */
+
+/* Mockup della copertina, in cima alla scheda */
+.libro__mockup {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: var(--spazio-sm);
+    padding-bottom: var(--spazio-xs);
+    margin-bottom: var(--spazio-sm);
+}
+
+.libro__mockup img {
+    max-width: 180px;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+    box-shadow:
+        0 1px 3px rgba(31, 31, 31, 0.08),
+        0 8px 20px rgba(31, 31, 31, 0.12),
+        0 18px 36px rgba(31, 31, 31, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.libro__mockup img:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow:
+        0 2px 4px rgba(31, 31, 31, 0.1),
+        0 10px 24px rgba(31, 31, 31, 0.15),
+        0 22px 44px rgba(31, 31, 31, 0.1);
+}
+
+/* Schema cliccabile, con anteprima */
+.libro__schema {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    margin-top: var(--spazio-xs);
+    border-radius: var(--raggio-piccolo);
+    overflow: hidden;
+    background-color: var(--colore-avorio-scuro);
+    border: 1px solid var(--colore-bordo);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.libro__schema:hover,
+.libro__schema:focus-visible {
+    border-color: var(--colore-bordeaux);
+    transform: translateY(-1px);
+}
+
+.libro__schema img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.2s ease;
+}
+
+.libro__schema:hover img {
+    opacity: 0.92;
+}
+
+.libro__schema-etichetta {
+    display: block;
+    text-align: center;
+    font-family: var(--font-corpo);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--colore-bordeaux);
+    background-color: rgba(247, 242, 231, 0.95);
+    padding: 0.65em 0.8em;
+    border-top: 1px solid var(--colore-bordo);
+}
+
+.libro__schema-etichetta::after {
+    content: '  ↗';
+    font-weight: 700;
+}
+
+/* Video integrato */
+.libro__video {
+    margin-top: var(--spazio-xs);
+    border-radius: var(--raggio-piccolo);
+    overflow: hidden;
+    background-color: var(--colore-antracite);
+    border: 1px solid var(--colore-bordo);
+}
+
+.libro__video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 360px;
+    background-color: var(--colore-antracite);
+}
+
+/* ==========================================================================
    7. PULSANTI
    ========================================================================== */
 
